@@ -1,6 +1,10 @@
-title: Ahmad Talib
-description: Computer Engineering Student Blog
-theme: jekyll-theme-midnight
+title: Ahmad Blog
+description: My personal blog
 
-author:
-  name: Ahmad Talib
+theme: jekyll-theme-cayman
+
+header_pages:
+  - index.md
+  - about.md
+  - blog.md
+  - contact.md
