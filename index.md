@@ -1,10 +1,3 @@
-<nav>
-  <a href="/repo-name/">Home</a> |
-  <a href="/repo-name/about">About</a> |
-  <a href="/repo-name/blog">Blog</a> |
-  <a href="/repo-name/contact">Contact</a>
-</nav>
-
 
 
 
