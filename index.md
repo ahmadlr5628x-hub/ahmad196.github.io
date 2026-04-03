@@ -1,15 +1,15 @@
+title: My Blog
 
-
-
-
-
-
-
-
+nav:
+  - name: Home
+    link: /
+  - name: About
+    link: /about.html
+  - name: Blog
+    link: /blog.html
+  - name: Contact
+    link: /contact.html
 ---
-
-
-
 
 
 layout: default
