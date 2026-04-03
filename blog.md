@@ -1,16 +1,9 @@
 ---
 layout: page
 title: Blog
+permalink: /blog/
 ---
 
-# My Blog
-
-Here are my blog posts where I share my learning and experiences:
-
-<ul>
 {% for post in site.posts %}
-  <li>
-    <a href="{{ post.url }}">{{ post.title }}</a>
-  </li>
+  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
 {% endfor %}
-</ul>
