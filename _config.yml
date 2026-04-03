@@ -1,0 +1,8 @@
+title: Ahmad Blog
+theme: jekyll-theme-cayman
+
+header_pages:
+  - index.md
+  - about.md
+  - blog.md
+  - contact.md
