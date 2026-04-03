@@ -1,9 +1,4 @@
-title: Ahmad Talib
-email: your-email@example.com
-description: My personal website showcasing skills, projects, and blog
-baseurl: "" # leave empty if hosted at username.github.io
-url: "" # your site URL if hosted live
-theme: minimal-mistakes-jekyll
+
 header_pages:
   - about.md
   - blog.md
