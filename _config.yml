@@ -4,14 +4,7 @@ description: My personal website showcasing skills, projects, and blog
 baseurl: "" # leave empty if hosted at username.github.io
 url: "" # your site URL if hosted live
 theme: 
-
-# Navigation links
-nav:
-  - name: Home
-    link: /
-  - name: About
-    link: /about/
-  - name: Blog
-    link: /blog/
-  - name: Contact
-    link: /contact/
+header_pages:
+  - about.md
+  - blog.md
+  - contact.md
