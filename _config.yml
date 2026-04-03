@@ -1,5 +1,11 @@
+title: My Blog
 
-header_pages:
-  - about.md
-  - blog.md
-  - contact.md
+nav:
+  - name: Home
+    link: /
+  - name: About
+    link: /about.html
+  - name: Blog
+    link: /blog.html
+  - name: Contact
+    link: /contact.html
