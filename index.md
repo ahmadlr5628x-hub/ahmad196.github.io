@@ -1,8 +1,8 @@
 title: My Blog
 
-about.md
-contact.md
-blog.md
+<a href="about.html">About</a> |
+<a href="blog.html">Blog</a> |
+<a href="firstblog.png">Contact</a>
 ---
 
 
