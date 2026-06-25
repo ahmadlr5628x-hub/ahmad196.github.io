@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmad Talib | Computer Engineering Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D1B2A;
+      --bg2:       #111F30;
+      --bg3:       #162435;
+      --card:      #152233;
+      --border:    #1E3248;
+      --teal:      #00C9A7;
+      --teal-dim:  #00a88a;
+      --amber:     #F59E0B;
+      --text:      #F0EDE8;
+      --muted:     #8B9BB4;
+      --subtle:    #3A4F68;
+      --font-d:    'Space Grotesk', sans-serif;
+      --font-b:    'Inter', sans-serif;
+      --font-m:    'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-b);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 1.75rem;
+      gap: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar-logo {
+      font-family: var(--font-m);
+      font-size: 0.75rem;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .sidebar-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), #4F46E5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-d);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-name {
+      font-family: var(--font-d);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar-role {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--font-m);
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex: 1;
+    }
+
+    .nav-label {
+      font-family: var(--font-m);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: rgba(0,201,167,0.1);
+      color: var(--teal);
+    }
+
+    .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover { border-color: var(--teal); color: var(--teal); }
+    .social-link svg { width: 15px; height: 15px; }
+
+    /* ── MAIN ── */
+    main { overflow-y: auto; }
+
+    /* ── SECTIONS ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── HERO / HOME ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,201,167,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(79,70,229,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-m);
+      font-size: 0.78rem;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    .hero-title {
+      font-family: var(--font-d);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .hero-title .highlight {
+      color: var(--teal);
+      position: relative;
+    }
+
+    /* terminal block */
+    .terminal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-m);
+      font-size: 0.825rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 2rem 0;
+    }
+
+    .terminal-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+
+    .terminal-line { margin-bottom: 0.3rem; }
+    .prompt { color: var(--teal); }
+    .output { color: var(--text); }
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--teal);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-val {
+      font-family: var(--font-d);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .stat-label {
+      font-size: 0.775rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ── SKILL PILLS ── */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .pill {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(0,201,167,0.1);
+      border: 1px solid rgba(0,201,167,0.25);
+      color: var(--teal);
+      font-family: var(--font-m);
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 3.5rem 3.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-m);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: var(--font-d);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 540px;
+    }
+
+    /* ── BLOG GRID ── */
+    .blog-grid {
+      padding: 2.5rem 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+
+    .post-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,201,167,0.1);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .post-tag {
+      font-family: var(--font-m);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      background: rgba(0,201,167,0.12);
+      color: var(--teal);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .post-date {
+      font-family: var(--font-m);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .post-title {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .post-excerpt {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .read-time {
+      font-family: var(--font-m);
+      font-size: 0.7rem;
+      color: var(--subtle);
+    }
+
+    .read-btn {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: gap 0.2s;
+    }
+
+    .post-card:hover .read-btn { gap: 0.6rem; }
+
+    /* ── POST DETAIL ── */
+    .post-detail-header {
+      padding: 3.5rem 3.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--font-m);
+      font-size: 0.78rem;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 1.5rem;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .back-btn svg { width: 14px; height: 14px; }
+    .back-btn:hover { color: var(--teal); gap: 0.6rem; }
+
+    .post-detail-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .post-detail-title {
+      font-family: var(--font-d);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .post-detail-body {
+      padding: 2.5rem 3.5rem;
+      max-width: 700px;
+    }
+
+    .post-detail-body p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 1.15rem;
+    }
+
+    .post-detail-body p:last-of-type { margin-bottom: 0; }
+
+    .post-hashtags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2.25rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-body {
+      padding: 2.5rem 3.5rem;
+      max-width: 700px;
+    }
+
+    .about-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .about-section h3 {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about-section h3::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .about-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .about-list li::before {
+      content: '▸';
+      color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+    }
+
+    .edu-name { font-weight: 500; font-size: 0.9rem; }
+    .edu-grade {
+      font-family: var(--font-m);
+      font-size: 0.875rem;
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    /* ── CONTACT ── */
+    .contact-body {
+      padding: 2.5rem 3.5rem;
+      max-width: 580px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .contact-item:hover { border-color: var(--teal); }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,201,167,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg { width: 18px; height: 18px; }
+    .contact-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.1rem; }
+    .contact-value { font-size: 0.9rem; font-weight: 500; }
+
+    /* ── MOBILE HEADER ── */
+    .mobile-header {
+      display: none;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-logo {
+      font-family: var(--font-d);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .mobile-nav {
+      display: none;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-header { display: flex; }
+      .hero { padding: 3rem 1.75rem; min-height: auto; padding-top: 2.5rem; }
+      .page-header { padding: 2rem 1.75rem 1rem; }
+      .blog-grid { padding: 1.5rem 1.75rem; grid-template-columns: 1fr; }
+      .about-body, .contact-body { padding: 1.75rem; }
+      .post-detail-header { padding: 2rem 1.75rem 1rem; }
+      .post-detail-body { padding: 1.75rem; }
+      .hero-stats { gap: 1.5rem; }
+    }
+
+    /* ── FADE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section.active > * {
+      animation: fadeUp 0.35s ease both;
+    }
+
+    .post-card:nth-child(1) { animation-delay: 0s; }
+    .post-card:nth-child(2) { animation-delay: 0.05s; }
+    .post-card:nth-child(3) { animation-delay: 0.1s; }
+    .post-card:nth-child(4) { animation-delay: 0.15s; }
+    .post-card:nth-child(5) { animation-delay: 0.2s; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--subtle); }
+  </style>
+</head>
+<body>
+
+<!-- ── MOBILE HEADER ── -->
+<div class="mobile-header">
+  <span class="mobile-logo">Ahmad Talib</span>
+  <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</div>
+<div class="mobile-nav" id="mobileNav">
+  <a class="nav-item active" onclick="navigate('home', this)">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </a>
+  <a class="nav-item" onclick="navigate('blog', this)">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    Blog
+  </a>
+  <a class="nav-item" onclick="navigate('about', this)">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    About
+  </a>
+  <a class="nav-item" onclick="navigate('contact', this)">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Contact
+  </a>
+</div>
+
+<div class="layout">
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">// portfolio</div>
+    <div class="sidebar-avatar">AT</div>
+    <div class="sidebar-name">Ahmad Talib</div>
+    <div class="sidebar-role">CE Student · Developer</div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Navigate</div>
+      <a class="nav-item active" onclick="navigate('home', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a class="nav-item" onclick="navigate('blog', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Blog Posts
+      </a>
+      <a class="nav-item" onclick="navigate('about', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        About Me
+      </a>
+      <a class="nav-item" onclick="navigate('contact', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Contact
+      </a>
+
+      <div class="nav-label">Topics</div>
+      <a class="nav-item" onclick="navigate('blog', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        C# & OOP
+      </a>
+      <a class="nav-item" onclick="navigate('blog', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Machine Learning
+      </a>
+      <a class="nav-item" onclick="navigate('blog', this)">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        Databases
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="social-link" href="https://github.com/ahmadlr5628x-hub" title="GitHub">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.72c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49C19.14 20.63 22 16.79 22 12.26 22 6.58 17.52 2 12 2z"/></svg>
+      </a>
+      <a class="social-link" href="mailto:ahmadtalib@example.com" title="Email">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a class="social-link" href="https://linkedin.com" title="LinkedIn">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="section active">
+      <div class="hero">
+        <div class="hero-eyebrow">Computer Engineering Student</div>
+        <h1 class="hero-title">
+          Hi, I'm <span class="highlight">Ahmad Talib</span><br/>
+          I build things &amp; write about them.
+        </h1>
+
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+          </div>
+          <div class="terminal-line"><span class="prompt">$ </span><span class="output">whoami</span></div>
+          <div class="terminal-line" style="color:#8B9BB4">→ CE Student · Developer · Learner</div>
+          <div class="terminal-line" style="margin-top:0.5rem"><span class="prompt">$ </span><span class="output">skills --list</span></div>
+          <div class="terminal-line" style="color:#8B9BB4">→ C# · Python · ML · SQL · Digital Logic · Web</div>
+          <div class="terminal-line" style="margin-top:0.5rem"><span class="prompt">$ </span><span id="typedLine"></span><span class="cursor"></span></div>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">10+</div>
+            <div class="stat-label">Blog Posts</div>
+          </div>
+          <div>
+            <div class="stat-val">5+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div>
+            <div class="stat-val">93%</div>
+            <div class="stat-label">Matric Score</div>
+          </div>
+        </div>
+
+        <div class="pill-group">
+          <span class="pill">C#</span>
+          <span class="pill">Python</span>
+          <span class="pill">Machine Learning</span>
+          <span class="pill">SQL / Databases</span>
+          <span class="pill">Digital Logic</span>
+          <span class="pill">Verilog HDL</span>
+          <span class="pill">HTML / CSS</span>
+          <span class="pill">GitHub Pages</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">// writing</div>
+        <h2 class="page-title">Blog Posts</h2>
+        <p class="page-sub">Notes, tutorials, and reflections on Computer Engineering topics I'm actively learning.</p>
+      </div>
+
+      <div class="blog-grid" id="blogGrid">
+        <!-- Posts injected by JS -->
+      </div>
+    </section>
+
+    <!-- POST DETAIL (opens when a post card is clicked) -->
+    <section id="post-detail" class="section">
+      <div class="post-detail-header">
+        <button class="back-btn" onclick="closePost()">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to all posts
+        </button>
+        <div class="post-detail-meta">
+          <span class="post-tag" id="postDetailTag"></span>
+          <span class="post-date" id="postDetailDate"></span>
+          <span class="read-time" id="postDetailReadTime"></span>
+        </div>
+        <h2 class="post-detail-title" id="postDetailTitle"></h2>
+      </div>
+      <div class="post-detail-body" id="postDetailBody"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">// about</div>
+        <h2 class="page-title">About Me</h2>
+        <p class="page-sub">A passionate CE student from Pakistan, building real skills one project at a time.</p>
+      </div>
+
+      <div class="about-body">
+        <div class="about-section">
+          <h3>Education</h3>
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">Matriculation (SSC)</div>
+              <div style="font-size:0.78rem;color:var(--muted)">Science Group</div>
+            </div>
+            <div class="edu-grade">93%</div>
+          </div>
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">Intermediate (HSSC)</div>
+              <div style="font-size:0.78rem;color:var(--muted)">Pre-Engineering</div>
+            </div>
+            <div class="edu-grade">87%</div>
+          </div>
+          <div class="edu-card">
+            <div>
+              <div class="edu-name">B.E. Computer Engineering</div>
+              <div style="font-size:0.78rem;color:var(--muted)">In Progress</div>
+            </div>
+            <div class="edu-grade" style="color:var(--amber)">Current</div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h3>Technical Skills</h3>
+          <ul class="about-list">
+            <li>Programming — C# (OOP, Windows Forms, Games), Python (ML, scripting)</li>
+            <li>Machine Learning — scikit-learn, model training &amp; evaluation, feature engineering</li>
+            <li>Databases — SQL, normalization (1NF–3NF), ER diagram design</li>
+            <li>Digital Logic — Boolean algebra, gate design, Verilog HDL, Microwind simulation</li>
+            <li>Web Development — HTML, CSS, GitHub Pages, Jekyll</li>
+            <li>Mathematics — Multivariable calculus, probability &amp; statistics</li>
+          </ul>
+        </div>
+
+        <div class="about-section">
+          <h3>Projects</h3>
+          <ul class="about-list">
+            <li>Heart Risk Prediction ML Pipeline using scikit-learn</li>
+            <li>C# Car Racing &amp; Arena Shooter Games</li>
+            <li>Temperature-Based Fan Speed Controller (Digital Logic)</li>
+            <li>Clinical Database Normalization (1NF–3NF)</li>
+            <li>Personal GitHub Blog Website (this site)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="page-header">
+        <div class="page-eyebrow">// contact</div>
+        <h2 class="page-title">Get In Touch</h2>
+        <p class="page-sub">Feel free to reach out for collaboration, questions, or just to connect.</p>
+      </div>
+
+      <div class="contact-body">
+        <a class="contact-item" href="mailto:ahmadtalib@example.com">
+          <div class="contact-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">ahmadtalib@example.com</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://github.com/ahmadlr5628x-hub">
+          <div class="contact-icon">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.72c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49C19.14 20.63 22 16.79 22 12.26 22 6.58 17.52 2 12 2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/ahmadlr5628x-hub</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://linkedin.com">
+          <div class="contact-icon">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">Connect with me</div>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor:default">
+          <div class="contact-icon" style="background:rgba(245,158,11,0.1);color:var(--amber)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Pakistan 🇵🇰</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ── POSTS DATA ── (Ahmad's portfolio blog series, 10 posts)
+  const posts = [
+    {
+      tag: "Portfolio",
+      date: "Sep 2024",
+      title: "Why I Started My GitHub Portfolio Website",
+      excerpt: "How a piece of advice from my Database Systems instructor turned into this entire site — and why a digital footprint matters more than I first realized.",
+      readTime: "3 min read",
+      content: [
+        "My name is Ahmad Talib, and I'm a Computer Engineering student at UET Lahore, Faisalabad Campus. This blog itself is part of an idea that started in one of my very first classes.",
+        "During Database Systems and Programming Fundamentals, our instructor, Dr. Bilal Ahmad, kept pushing us to think beyond just passing exams. He encouraged every student to build a professional portfolio early on — somewhere that could hold our projects, our blogs, our achievements, and most importantly, the proof that we were actually growing as engineers.",
+        "At first I treated it like just another assignment, but the more I thought about it, the more it made sense. A portfolio is basically a digital footprint — something an employer, a university admissions committee, or even a fellow student could look at and immediately understand what I've built and learned, without needing a long conversation to explain it.",
+        "So that's exactly why this site exists. Over the next several posts, I'm going to use it to document my actual semester experiences — the projects, the late nights, the grades, and everything in between — starting from the day I got my admission letter."
+      ]
+    },
+    {
+      tag: "Journey",
+      date: "Sep 2024",
+      title: "My Admission Journey and Choosing Computer Engineering",
+      excerpt: "Getting into UET Lahore, Faisalabad Campus, picking Computer Engineering over everything else, and the nervous excitement of week one.",
+      readTime: "3 min read",
+      content: [
+        "I still remember the day I got my admission letter from UET Lahore, Faisalabad Campus. After months of preparation and uncertainty, seeing my name confirmed for a seat felt like the first real \"win\" of my engineering life.",
+        "A lot of people asked me why I picked Computer Engineering instead of something like Electrical or Software Engineering. Honestly, it came down to the mix — I wanted the hardware side, the logic design, the circuits, but I also wanted serious programming, databases, and software development. Computer Engineering sat exactly at that intersection.",
+        "Before classes even started, I had a head full of expectations — coding from day one, complex projects, intense competition. The reality was a slower, more deliberate start, but in a good way. My first impressions were of a campus full of people just as nervous and excited as I was, all trying to figure out where they fit.",
+        "Meeting my classmates, adjusting to a completely new routine, and realizing that university life rewards consistency more than panic — that was the real lesson of those first few weeks. I walked in determined to actually understand programming and engineering concepts, not just survive the semester, and that mindset is something I carried into everything that followed."
+      ]
+    },
+    {
+      tag: "Journey",
+      date: "Oct 2024",
+      title: "My First Semester Journey",
+      excerpt: "Programming Fundamentals, Database Systems, a constant stream of quizzes, and the lesson that understanding beats memorizing.",
+      readTime: "3 min read",
+      content: [
+        "My first semester revolved around two subjects that would end up shaping a lot of my engineering thinking: Programming Fundamentals and Database Systems. Both sound simple on paper, but they demanded a completely different way of approaching problems than anything I'd done before.",
+        "Between assignments, quizzes, and weekly labs, I quickly learned that university life isn't about cramming the night before — it's about staying on top of a constant stream of small deadlines. Some weeks felt overwhelming, especially when a Database Systems assignment and a Programming Fundamentals quiz landed in the same few days.",
+        "What changed my approach early on was something Dr. Bilal Ahmad said repeatedly in class: understand the concept, don't just memorize the syntax or the steps. It sounds obvious, but it genuinely changed how I studied — instead of memorizing SQL queries or code snippets, I started asking why they worked the way they did.",
+        "Balancing that depth of understanding with the sheer volume of coursework was the real challenge of the semester. It was tiring, but by the end of it, I could tell the difference between students who had memorized the material and students who actually understood it — and I wanted to be in the second group."
+      ]
+    },
+    {
+      tag: "Databases",
+      date: "Dec 2024",
+      title: "My First Major Project – DM Mart Revenue Prediction",
+      excerpt: "Designing my first real database from scratch for a retail revenue prediction project, and learning the difference between a database that works and one that's well built.",
+      readTime: "3 min read",
+      content: [
+        "My first real taste of a full database project came with DM Mart Revenue Prediction, built for my Database Systems course. The idea was to take retail business data — sales, products, branches — and design a database structure that could realistically support revenue analysis.",
+        "This project is where SQL stopped being theory and became a tool. I had to think through database design from scratch: what tables I needed, how they related to each other, and how to avoid duplicated or inconsistent data through normalization. It was the first time I really felt the difference between a database that \"works\" and one that's actually well designed.",
+        "Even though the subject matter was business data rather than something I was personally passionate about, the project taught me something more valuable than the topic itself — how to think like someone building real infrastructure for a real business, and how to work as part of a team where everyone's part of the schema had to fit together.",
+        "By the end of DM Mart, I understood data organization in a way no lecture alone could have taught me. It set the foundation for every database project I'd take on afterward."
+      ]
+    },
+    {
+      tag: "Reflection",
+      date: "Jan 2025",
+      title: "Completing My First Semester and Achieving a 3.2 CGPA",
+      excerpt: "The wait for results, the honest highs and lows of semester one, and why a 3.2 CGPA became a baseline instead of a finish line.",
+      readTime: "3 min read",
+      content: [
+        "Finishing my first set of final exams brought a strange mix of relief and anxiety. The relief came from surviving the semester; the anxiety came from not knowing exactly how well — or badly — I'd actually done.",
+        "Waiting for the results felt longer than the exams themselves. When my transcript finally came out showing a 3.2 CGPA, I felt genuinely proud. It wasn't a perfect score, but it was an honest reflection of a semester where I was still learning how to be a university student, not just an engineering student.",
+        "Looking back, there were things that clearly went well — my grasp of Database Systems concepts, my growing comfort with programming logic, and the discipline I built around assignments. But there were also gaps: time management around quiz weeks, and a tendency to underestimate how much revision certain subjects needed.",
+        "More than the number itself, that first CGPA gave me a clear, honest baseline. It motivated me to walk into my second semester with a plan instead of just good intentions."
+      ]
+    },
+    {
+      tag: "Journey",
+      date: "Feb 2025",
+      title: "Beginning My Second Semester",
+      excerpt: "Walking in with more confidence, a heavier course load, and study habits that finally matched what university actually expected of me.",
+      readTime: "2 min read",
+      content: [
+        "Second semester felt different from the very first day. I wasn't the nervous new student anymore — I had a CGPA, a routine, and a much better sense of what university actually expected from me.",
+        "The course load stepped up noticeably. New subjects, harder expectations from instructors, and projects that assumed I already knew the basics instead of teaching them from zero. It was intimidating at first, but also exciting, because it meant I was finally getting into the parts of engineering I'd been looking forward to.",
+        "I went into the semester with better study habits than before — more consistent revision, better note-taking, and a habit of starting assignments earlier instead of right before the deadline. None of that came naturally; it came directly from the lessons of semester one.",
+        "Looking back now, I can clearly see that first semester wasn't just about grades — it was preparation. It built the foundation that made it possible to take on the much bigger projects that defined my second semester."
+      ]
+    },
+    {
+      tag: "C# / OOP",
+      date: "Mar 2025",
+      title: "Object-Oriented Programming Projects",
+      excerpt: "Bringing classes, inheritance, and polymorphism to life through a University Management System and a C# game development project.",
+      readTime: "4 min read",
+      content: [
+        "Second semester is where Object-Oriented Programming really came alive for me, mainly through two projects: a University Management System and a Game Development Project, both built in C#.",
+        "The University Management System forced me to actually use the core OOP concepts I'd only read about before — classes and objects representing students, courses, and faculty, inheritance to share behavior across related entities, and encapsulation to keep data safe from unintended changes. Designing the class structure properly mattered more than I expected; a sloppy design early on made everything harder later.",
+        "The Game Development Project pushed me in a different direction. Beyond OOP fundamentals, I had to deal with polymorphism for different game objects behaving differently under the same interface, and file handling to save and load game state. It was less abstract than the management system and far more fun to debug, mostly because I could literally see things go wrong on screen.",
+        "Both projects came with real programming challenges — bugs that didn't make sense at first, design decisions I had to redo halfway through, and moments of genuine frustration. But solving those problems, one by one, is what actually leveled up my coding skills, far more than any lecture could have."
+      ]
+    },
+    {
+      tag: "Databases",
+      date: "Apr 2025",
+      title: "Diabetes Risk Prediction – My Database Systems Project",
+      excerpt: "Trading retail data for healthcare data, and discovering how database design quality directly affects machine learning performance.",
+      readTime: "4 min read",
+      content: [
+        "If DM Mart was my introduction to databases, Diabetes Risk Prediction was where I understood why the design choices actually matter. This time, the project moved from retail data to healthcare data, and that change alone shifted how carefully I approached the whole thing.",
+        "Dr. Bilal Ahmad, whose own background is in Artificial Intelligence, Machine Learning, and Deep Learning, encouraged us to work with datasets that meant something — and healthcare data is about as meaningful as it gets. Working with medical records made me far more conscious of accuracy, consistency, and structure than a generic business dataset ever had.",
+        "That meant going deeper into normalization and data integrity — making sure the database didn't just store information, but stored it correctly and without contradiction. A single inconsistent field in a healthcare dataset isn't just messy; it can quietly produce wrong conclusions later on.",
+        "That last point became very real when I started thinking about how this data would eventually be used. A clean, well-structured database isn't just good practice for its own sake — it's the difference between a machine learning model that performs well and one that learns the wrong patterns from bad data. That connection between database design and ML performance has stuck with me ever since."
+      ]
+    },
+    {
+      tag: "Digital Logic",
+      date: "May 2025",
+      title: "Smart Parking System – My Digital Logic Design Project",
+      excerpt: "Stepping out of pure software and into circuits, sensors, and gates with a Digital Logic Design project that didn't forgive vague thinking.",
+      readTime: "4 min read",
+      content: [
+        "Smart Parking System was my Digital Logic Design project, and it pulled me out of pure software for the first time and into a world of circuits, sensors, and actual physical components.",
+        "The objective was straightforward on paper: design a system that could detect available parking spots and indicate them automatically. The reality involved a lot more — choosing the right components, designing the logic circuit that would process sensor inputs, and figuring out how to translate a real-world problem into gates and logic that could actually be built and tested.",
+        "Implementation came with its own set of headaches. Circuits that looked correct on paper didn't always behave correctly once built, and tracking down exactly which connection or gate was causing unexpected output took real patience. Testing wasn't a single step at the end — it was something I had to do constantly, after almost every change.",
+        "What I took away from Smart Parking System wasn't just a working circuit — it was a completely different kind of problem-solving. Hardware doesn't forgive vague thinking the way software sometimes does, and that experience taught me to be far more precise, whether I was working with a breadboard or a block of code."
+      ]
+    },
+    {
+      tag: "Reflection",
+      date: "Jun 2025",
+      title: "End of My Second Semester – Looking Back and Looking Forward",
+      excerpt: "From admission letter to the end of year two — what's changed, who helped get me here, and where I want to take this portfolio next.",
+      readTime: "4 min read",
+      content: [
+        "Writing this post feels different from the previous nine. This one isn't about a single project or a single milestone — it's about looking back at the entire journey from the day I got my admission letter to where I am right now, at the end of my second semester.",
+        "When I compare who I was walking into my first Programming Fundamentals class to who I am after building database systems, OOP applications, and a digital logic project, the difference is obvious. My confidence has grown, my programming skills have matured, my understanding of databases runs much deeper, and — maybe just as important — my teamwork, communication, and problem-solving abilities have improved alongside the technical skills.",
+        "A lot of that growth traces back to one person: Dr. Bilal Ahmad. His insistence on understanding concepts instead of memorizing them, and his push toward meaningful, practical projects in both Programming Fundamentals and Database Systems, shaped how I approach every problem now, technical or otherwise.",
+        "Looking forward, I want to go deeper into Artificial Intelligence, Machine Learning, and Data Science, and keep building projects that actually matter rather than just checking a box. This portfolio is going to keep growing right alongside that journey, and I'm genuinely optimistic about where the next few semesters will take it."
+      ],
+      hashtags: ["#MLwithDrBilalAhmad", "#DrBilalAhmad", "#MLProject"]
+    },
+  ];
+
+  // ── RENDER POSTS ──
+  function renderPosts() {
+    const grid = document.getElementById('blogGrid');
+    grid.innerHTML = posts.map((p, i) => `
+      <div class="post-card" onclick="openPost(${i})">
+        <div class="post-meta">
+          <span class="post-tag">${p.tag}</span>
+          <span class="post-date">${p.date}</span>
+        </div>
+        <div class="post-title">${p.title}</div>
+        <div class="post-excerpt">${p.excerpt}</div>
+        <div class="post-footer">
+          <span class="read-time">${p.readTime}</span>
+          <span class="read-btn">Read more →</span>
+        </div>
+      </div>
+    `).join('');
+  }
+  renderPosts();
+
+  // ── OPEN / CLOSE A SINGLE POST ──
+  function openPost(i) {
+    const p = posts[i];
+    document.getElementById('postDetailTag').textContent = p.tag;
+    document.getElementById('postDetailDate').textContent = p.date;
+    document.getElementById('postDetailReadTime').textContent = p.readTime;
+    document.getElementById('postDetailTitle').textContent = p.title;
+
+    let bodyHtml = p.content.map(para => `<p>${para}</p>`).join('');
+    if (p.hashtags && p.hashtags.length) {
+      bodyHtml += `<div class="post-hashtags">${p.hashtags.map(h => `<span class="pill">${h}</span>`).join('')}</div>`;
+    }
+    document.getElementById('postDetailBody').innerHTML = bodyHtml;
+
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('post-detail').classList.add('active');
+    document.getElementById('mobileNav').classList.remove('open');
+    window.scrollTo(0, 0);
+  }
+
+  function closePost() {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('blog').classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.getAttribute('onclick') === "navigate('blog', this)") n.classList.add('active');
+    });
+    window.scrollTo(0, 0);
+  }
+
+  // ── NAVIGATION ──
+  function navigate(id, el) {
+    // hide all sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    // deactivate all nav items
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    // show target
+    document.getElementById(id).classList.add('active');
+    // activate clicked item (mark all same-section nav items)
+    document.querySelectorAll(`.nav-item`).forEach(n => {
+      if (n.getAttribute('onclick') === el?.getAttribute('onclick')) n.classList.add('active');
+    });
+    // close mobile nav
+    document.getElementById('mobileNav').classList.remove('open');
+    window.scrollTo(0, 0);
+  }
+
+  // ── MOBILE NAV TOGGLE ──
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  // ── TERMINAL TYPING ──
+  const phrases = [
+    'cat current_focus.txt',
+    'git commit -m "keep learning"',
+    'python train_model.py',
+    'dotnet run --project Blog',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typedLine');
+
+  function type() {
+    const word = phrases[pi];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 70);
+  }
+  setTimeout(type, 1200);
+</script>
+</body>
+</html>
