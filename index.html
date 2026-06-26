@@ -471,15 +471,6 @@
 
     .post-detail-body p:last-of-type { margin-bottom: 0; }
 
-    .post-detail-body a {
-      color: var(--teal);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .post-detail-body a:hover {
-      text-decoration: underline;
-    }
-
     .post-hashtags {
       display: flex;
       flex-wrap: wrap;
@@ -658,6 +649,12 @@
       animation: fadeUp 0.35s ease both;
     }
 
+    .post-card:nth-child(1) { animation-delay: 0s; }
+    .post-card:nth-child(2) { animation-delay: 0.05s; }
+    .post-card:nth-child(3) { animation-delay: 0.1s; }
+    .post-card:nth-child(4) { animation-delay: 0.15s; }
+    .post-card:nth-child(5) { animation-delay: 0.2s; }
+
     /* scrollbar */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -667,6 +664,7 @@
 </head>
 <body>
 
+<!-- ── MOBILE HEADER ── -->
 <div class="mobile-header">
   <span class="mobile-logo">Ahmad Talib</span>
   <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
@@ -695,6 +693,7 @@
 </div>
 
 <div class="layout">
+  <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <div class="sidebar-logo">// portfolio</div>
     <div class="sidebar-avatar">AT</div>
@@ -748,8 +747,10 @@
     </div>
   </aside>
 
+  <!-- ── MAIN CONTENT ── -->
   <main>
 
+    <!-- HOME -->
     <section id="home" class="section active">
       <div class="hero">
         <div class="hero-eyebrow">Computer Engineering Student</div>
@@ -799,6 +800,7 @@
       </div>
     </section>
 
+    <!-- BLOG -->
     <section id="blog" class="section">
       <div class="page-header">
         <div class="page-eyebrow">// writing</div>
@@ -807,9 +809,11 @@
       </div>
 
       <div class="blog-grid" id="blogGrid">
-        </div>
+        <!-- Posts injected by JS -->
+      </div>
     </section>
 
+    <!-- POST DETAIL (opens when a post card is clicked) -->
     <section id="post-detail" class="section">
       <div class="post-detail-header">
         <button class="back-btn" onclick="closePost()">
@@ -826,6 +830,7 @@
       <div class="post-detail-body" id="postDetailBody"></div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="section">
       <div class="page-header">
         <div class="page-eyebrow">// about</div>
@@ -884,6 +889,7 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="section">
       <div class="page-header">
         <div class="page-eyebrow">// contact</div>
@@ -898,7 +904,7 @@
           </div>
           <div>
             <div class="contact-label">Email</div>
-            <div class="contact-value">ahmadtaliblr108.com</div>
+            <div class="contact-value">ahmadtalib@example.com</div>
           </div>
         </a>
         <a class="contact-item" href="https://github.com/ahmadlr5628x-hub">
@@ -935,23 +941,8 @@
 </div>
 
 <script>
-  // ── POSTS DATA ── (Ahmad's portfolio blog series)
+  // ── POSTS DATA ── (Ahmad's portfolio blog series, 10 posts)
   const posts = [
-    {
-      tag: "Supervisor",
-      date: "Oct 2024",
-      title: "Academic Guidance under Dr. Bilal Ahmad",
-      excerpt: "Reflecting on our deep dives into Database Management Systems (DBS) and Python engineering paradigms, complete with official research and professional profile alignments.",
-      readTime: "4 min read",
-      content: [
-        "In our core curriculum, classes like Database Systems and advanced programming design dictate our path forward. Dr. Bilal Ahmad structured these modules around strict practical engineering metrics rather than simple abstract theories.",
-        "Through our DBS components, we explored algorithmic data structuring and schema normalization rules, alongside writing optimized analytics architectures using Python framework ecosystems.",
-        "To view his comprehensive academic work, publications, and professional networks, please reference the official communication profiles below:",
-        '• <a href="https://scholar.google.com.au/citations?user=8nZ0jVkAAAAJ&hl=en" target="_blank">Google Scholar Profile</a>',
-        '• <a href="https://www.facebook.com/Dr.BilalAhm" target="_blank">Facebook Professional Space</a>',
-        '• <a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQE_797qNl1tXQAAAZ7_6xz4ZXlGq3h7oIzF7wjkLpqjRE3yZ6hBrPL07Xg4_xkA_HT0Ozs3TN_0IUHRST8uoertC_fK8F15gtHMTVlmZidcijULbn9pmfdNKygmoNj_5fuUjjI=&original_referer=https://ranasaqlainsaqlain39-ops.github.io/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fdrbilalphd%2F" target="_blank">LinkedIn Professional Network</a>'
-      ]
-    },
     {
       tag: "Portfolio",
       date: "Sep 2024",
@@ -965,6 +956,22 @@
         "So that's exactly why this site exists. Over the next several posts, I'm going to use it to document my actual semester experiences — the projects, the late nights, the grades, and everything in between — starting from the day I got my admission letter."
       ]
     },
+  
+    {
+      tag: "Supervisor",
+      date: "Oct 2024",
+      title: "Academic Guidance under Dr. Bilal Ahmad",
+      excerpt: "Reflecting on our deep dives into Database Management Systems (DBS) and Python engineering paradigms, complete with official research and professional profile alignments.",
+      readTime: "4 min read",
+      content: [
+        "In our core curriculum, classes like Database Systems and advanced programming design dictate our path forward. Dr. Bilal Ahmad structured these modules around strict practical engineering metrics rather than simple abstract theories.",
+        "Through our DBS components, we explored algorithmic data structuring and schema normalization rules, alongside writing optimized analytics architectures using Python framework ecosystems.",
+        "To view his comprehensive academic work, publications, and professional networks, please reference the official communication profiles below:",
+        '• <a href="https://scholar.google.com.au/citations?user=8nZ0jVkAAAAJ&hl=en" target="_blank">Google Scholar Profile</a>',
+        '• <a href="https://www.facebook.com/Dr.BilalAhm" target="_blank">Facebook Professional Space</a>',
+        '• <a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQE_797qNl1tXQAAAZ7_6xz4ZXlGq3h7oIzF7wjkLpqjRE3yZ6hBrPL07Xg4_xkA_HT0Ozs3TN_0IUHRST8uoertC_fK8F15gtHMTVlmZidcijULbn9pmfdNKygmoNj_5fuUjjI=&original_referer=https://ranasaqlainsaqlain39-ops.github.io/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fdrbilalphd%2F" target="_blank">LinkedIn Professional Network</a>'
+        ]
+    },
     {
       tag: "Journey",
       date: "Sep 2024",
@@ -972,84 +979,213 @@
       excerpt: "Getting into UET Lahore, Faisalabad Campus, picking Computer Engineering over everything else, and the nervous excitement of week one.",
       readTime: "3 min read",
       content: [
-        "I still remember the day I got my admission letter from UET Lahore, Faisalabad Campus. After months of preparation and uncertainty, seeing my name confirmed for a seat felt like the first real 'win' of my engineering life.",
+        "I still remember the day I got my admission letter from UET Lahore, Faisalabad Campus. After months of preparation and uncertainty, seeing my name confirmed for a seat felt like the first real \"win\" of my engineering life.",
         "A lot of people asked me why I picked Computer Engineering instead of something like Electrical or Software Engineering. Honestly, it came down to the mix — I wanted the hardware side, the logic design, the circuits, but I also wanted serious programming, databases, and software development. Computer Engineering sat exactly at that intersection.",
-        "Before classes even started, I was anticipating how dense the coursework might get, but having the structure of dedicated labs alongside mentorship has redefined my workflow completely."
+        "Before classes even started, I had a head full of expectations — coding from day one, complex projects, intense competition. The reality was a slower, more deliberate start, but in a good way. My first impressions were of a campus full of people just as nervous and excited as I was, all trying to figure out where they fit.",
+        "Meeting my classmates, adjusting to a completely new routine, and realizing that university life rewards consistency more than panic — that was the real lesson of those first few weeks. I walked in determined to actually understand programming and engineering concepts, not just survive the semester, and that mindset is something I carried into everything that followed."
       ]
-    }
+    },
+    {
+      tag: "Journey",
+      date: "Oct 2024",
+      title: "My First Semester Journey",
+      excerpt: "Programming Fundamentals, Database Systems, a constant stream of quizzes, and the lesson that understanding beats memorizing.",
+      readTime: "3 min read",
+      content: [
+        "My first semester revolved around two subjects that would end up shaping a lot of my engineering thinking: Programming Fundamentals and Database Systems. Both sound simple on paper, but they demanded a completely different way of approaching problems than anything I'd done before.",
+        "Between assignments, quizzes, and weekly labs, I quickly learned that university life isn't about cramming the night before — it's about staying on top of a constant stream of small deadlines. Some weeks felt overwhelming, especially when a Database Systems assignment and a Programming Fundamentals quiz landed in the same few days.",
+        "What changed my approach early on was something Dr. Bilal Ahmad said repeatedly in class: understand the concept, don't just memorize the syntax or the steps. It sounds obvious, but it genuinely changed how I studied — instead of memorizing SQL queries or code snippets, I started asking why they worked the way they did.",
+        "Balancing that depth of understanding with the sheer volume of coursework was the real challenge of the semester. It was tiring, but by the end of it, I could tell the difference between students who had memorized the material and students who actually understood it — and I wanted to be in the second group."
+      ]
+    },
+    {
+      tag: "Databases",
+      date: "Dec 2024",
+      title: "My First Major Project – DM Mart Revenue Prediction",
+      excerpt: "Designing my first real database from scratch for a retail revenue prediction project, and learning the difference between a database that works and one that's well built.",
+      readTime: "3 min read",
+      content: [
+        "My first real taste of a full database project came with DM Mart Revenue Prediction, built for my Database Systems course. The idea was to take retail business data — sales, products, branches — and design a database structure that could realistically support revenue analysis.",
+        "This project is where SQL stopped being theory and became a tool. I had to think through database design from scratch: what tables I needed, how they related to each other, and how to avoid duplicated or inconsistent data through normalization. It was the first time I really felt the difference between a database that \"works\" and one that's actually well designed.",
+        "Even though the subject matter was business data rather than something I was personally passionate about, the project taught me something more valuable than the topic itself — how to think like someone building real infrastructure for a real business, and how to work as part of a team where everyone's part of the schema had to fit together.",
+        "By the end of DM Mart, I understood data organization in a way no lecture alone could have taught me. It set the foundation for every database project I'd take on afterward."
+      ]
+    },
+    {
+      tag: "Reflection",
+      date: "Jan 2025",
+      title: "Completing My First Semester and Achieving a 3.2 CGPA",
+      excerpt: "The wait for results, the honest highs and lows of semester one, and why a 3.2 CGPA became a baseline instead of a finish line.",
+      readTime: "3 min read",
+      content: [
+        "Finishing my first set of final exams brought a strange mix of relief and anxiety. The relief came from surviving the semester; the anxiety came from not knowing exactly how well — or badly — I'd actually done.",
+        "Waiting for the results felt longer than the exams themselves. When my transcript finally came out showing a 3.2 CGPA, I felt genuinely proud. It wasn't a perfect score, but it was an honest reflection of a semester where I was still learning how to be a university student, not just an engineering student.",
+        "Looking back, there were things that clearly went well — my grasp of Database Systems concepts, my growing comfort with programming logic, and the discipline I built around assignments. But there were also gaps: time management around quiz weeks, and a tendency to underestimate how much revision certain subjects needed.",
+        "More than the number itself, that first CGPA gave me a clear, honest baseline. It motivated me to walk into my second semester with a plan instead of just good intentions."
+      ]
+    },
+    {
+      tag: "Journey",
+      date: "Feb 2025",
+      title: "Beginning My Second Semester",
+      excerpt: "Walking in with more confidence, a heavier course load, and study habits that finally matched what university actually expected of me.",
+      readTime: "2 min read",
+      content: [
+        "Second semester felt different from the very first day. I wasn't the nervous new student anymore — I had a CGPA, a routine, and a much better sense of what university actually expected from me.",
+        "The course load stepped up noticeably. New subjects, harder expectations from instructors, and projects that assumed I already knew the basics instead of teaching them from zero. It was intimidating at first, but also exciting, because it meant I was finally getting into the parts of engineering I'd been looking forward to.",
+        "I went into the semester with better study habits than before — more consistent revision, better note-taking, and a habit of starting assignments earlier instead of right before the deadline. None of that came naturally; it came directly from the lessons of semester one.",
+        "Looking back now, I can clearly see that first semester wasn't just about grades — it was preparation. It built the foundation that made it possible to take on the much bigger projects that defined my second semester."
+      ]
+    },
+    {
+      tag: "C# / OOP",
+      date: "Mar 2025",
+      title: "Object-Oriented Programming Projects",
+      excerpt: "Bringing classes, inheritance, and polymorphism to life through a University Management System and a C# game development project.",
+      readTime: "4 min read",
+      content: [
+        "Second semester is where Object-Oriented Programming really came alive for me, mainly through two projects: a University Management System and a Game Development Project, both built in C#.",
+        "The University Management System forced me to actually use the core OOP concepts I'd only read about before — classes and objects representing students, courses, and faculty, inheritance to share behavior across related entities, and encapsulation to keep data safe from unintended changes. Designing the class structure properly mattered more than I expected; a sloppy design early on made everything harder later.",
+        "The Game Development Project pushed me in a different direction. Beyond OOP fundamentals, I had to deal with polymorphism for different game objects behaving differently under the same interface, and file handling to save and load game state. It was less abstract than the management system and far more fun to debug, mostly because I could literally see things go wrong on screen.",
+        "Both projects came with real programming challenges — bugs that didn't make sense at first, design decisions I had to redo halfway through, and moments of genuine frustration. But solving those problems, one by one, is what actually leveled up my coding skills, far more than any lecture could have."
+      ]
+    },
+    {
+      tag: "Databases",
+      date: "Apr 2025",
+      title: "Diabetes Risk Prediction – My Database Systems Project",
+      excerpt: "Trading retail data for healthcare data, and discovering how database design quality directly affects machine learning performance.",
+      readTime: "4 min read",
+      content: [
+        "If DM Mart was my introduction to databases, Diabetes Risk Prediction was where I understood why the design choices actually matter. This time, the project moved from retail data to healthcare data, and that change alone shifted how carefully I approached the whole thing.",
+        "Dr. Bilal Ahmad, whose own background is in Artificial Intelligence, Machine Learning, and Deep Learning, encouraged us to work with datasets that meant something — and healthcare data is about as meaningful as it gets. Working with medical records made me far more conscious of accuracy, consistency, and structure than a generic business dataset ever had.",
+        "That meant going deeper into normalization and data integrity — making sure the database didn't just store information, but stored it correctly and without contradiction. A single inconsistent field in a healthcare dataset isn't just messy; it can quietly produce wrong conclusions later on.",
+        "That last point became very real when I started thinking about how this data would eventually be used. A clean, well-structured database isn't just good practice for its own sake — it's the difference between a machine learning model that performs well and one that learns the wrong patterns from bad data. That connection between database design and ML performance has stuck with me ever since."
+      ]
+    },
+    {
+      tag: "Digital Logic",
+      date: "May 2025",
+      title: "Smart Parking System – My Digital Logic Design Project",
+      excerpt: "Stepping out of pure software and into circuits, sensors, and gates with a Digital Logic Design project that didn't forgive vague thinking.",
+      readTime: "4 min read",
+      content: [
+        "Smart Parking System was my Digital Logic Design project, and it pulled me out of pure software for the first time and into a world of circuits, sensors, and actual physical components.",
+        "The objective was straightforward on paper: design a system that could detect available parking spots and indicate them automatically. The reality involved a lot more — choosing the right components, designing the logic circuit that would process sensor inputs, and figuring out how to translate a real-world problem into gates and logic that could actually be built and tested.",
+        "Implementation came with its own set of headaches. Circuits that looked correct on paper didn't always behave correctly once built, and tracking down exactly which connection or gate was causing unexpected output took real patience. Testing wasn't a single step at the end — it was something I had to do constantly, after almost every change.",
+        "What I took away from Smart Parking System wasn't just a working circuit — it was a completely different kind of problem-solving. Hardware doesn't forgive vague thinking the way software sometimes does, and that experience taught me to be far more precise, whether I was working with a breadboard or a block of code."
+      ]
+    },
+    {
+      tag: "Reflection",
+      date: "Jun 2025",
+      title: "End of My Second Semester – Looking Back and Looking Forward",
+      excerpt: "From admission letter to the end of year two — what's changed, who helped get me here, and where I want to take this portfolio next.",
+      readTime: "4 min read",
+      content: [
+        "Writing this post feels different from the previous nine. This one isn't about a single project or a single milestone — it's about looking back at the entire journey from the day I got my admission letter to where I am right now, at the end of my second semester.",
+        "When I compare who I was walking into my first Programming Fundamentals class to who I am after building database systems, OOP applications, and a digital logic project, the difference is obvious. My confidence has grown, my programming skills have matured, my understanding of databases runs much deeper, and — maybe just as important — my teamwork, communication, and problem-solving abilities have improved alongside the technical skills.",
+        "A lot of that growth traces back to one person: Dr. Bilal Ahmad. His insistence on understanding concepts instead of memorizing them, and his push toward meaningful, practical projects in both Programming Fundamentals and Database Systems, shaped how I approach every problem now, technical or otherwise.",
+        "Looking forward, I want to go deeper into Artificial Intelligence, Machine Learning, and Data Science, and keep building projects that actually matter rather than just checking a box. This portfolio is going to keep growing right alongside that journey, and I'm genuinely optimistic about where the next few semesters will take it."
+      ],
+      hashtags: ["#MLwithDrBilalAhmad", "#DrBilalAhmad", "#MLProject"]
+    },
   ];
 
-  // ── INITIALIZE BLOG ──
-  function initBlog() {
+  // ── RENDER POSTS ──
+  function renderPosts() {
     const grid = document.getElementById('blogGrid');
-    if(!grid) return;
-    grid.innerHTML = '';
-
-    posts.forEach((post, i) => {
-      const card = document.createElement('div');
-      card.className = 'post-card';
-      card.onclick = () => openPost(i);
-      card.innerHTML = `
+    grid.innerHTML = posts.map((p, i) => `
+      <div class="post-card" onclick="openPost(${i})">
         <div class="post-meta">
-          <span class="post-tag">${post.tag}</span>
-          <span class="post-date">${post.date}</span>
+          <span class="post-tag">${p.tag}</span>
+          <span class="post-date">${p.date}</span>
         </div>
-        <h3 class="post-title">${post.title}</h3>
-        <p class="post-excerpt">${post.excerpt}</p>
+        <div class="post-title">${p.title}</div>
+        <div class="post-excerpt">${p.excerpt}</div>
         <div class="post-footer">
-          <span class="read-time">${post.readTime}</span>
-          <span class="read-btn">Read Entry 
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
+          <span class="read-time">${p.readTime}</span>
+          <span class="read-btn">Read more →</span>
         </div>
-      `;
-      grid.appendChild(card);
-    });
+      </div>
+    `).join('');
   }
+  renderPosts();
 
-  // ── NAVIGATION CONTROLLER ──
-  function navigate(sectionId, element) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  // ── OPEN / CLOSE A SINGLE POST ──
+  function openPost(i) {
+    const p = posts[i];
+    document.getElementById('postDetailTag').textContent = p.tag;
+    document.getElementById('postDetailDate').textContent = p.date;
+    document.getElementById('postDetailReadTime').textContent = p.readTime;
+    document.getElementById('postDetailTitle').textContent = p.title;
 
-    document.getElementById(sectionId).classList.add('active');
-    if (element) element.classList.add('active');
-    
-    // Close mobile navigation menu if open
-    document.getElementById('mobileNav').classList.remove('open');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // ── OPEN POST DETAIL ──
-  function openPost(index) {
-    const post = posts[index];
-    document.getElementById('postDetailTag').textContent = post.tag;
-    document.getElementById('postDetailDate').textContent = post.date;
-    document.getElementById('postDetailReadTime').textContent = post.readTime;
-    document.getElementById('postDetailTitle').textContent = post.title;
-
-    const body = document.getElementById('postDetailBody');
-    body.innerHTML = post.content.map(p => `<p>${p}</p>`).join('');
+    let bodyHtml = p.content.map(para => `<p>${para}</p>`).join('');
+    if (p.hashtags && p.hashtags.length) {
+      bodyHtml += `<div class="post-hashtags">${p.hashtags.map(h => `<span class="pill">${h}</span>`).join('')}</div>`;
+    }
+    document.getElementById('postDetailBody').innerHTML = bodyHtml;
 
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById('post-detail').classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mobileNav').classList.remove('open');
+    window.scrollTo(0, 0);
   }
 
-  // ── CLOSE POST DETAIL ──
   function closePost() {
-    document.getElementById('post-detail').classList.remove('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById('blog').classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.getAttribute('onclick') === "navigate('blog', this)") n.classList.add('active');
+    });
+    window.scrollTo(0, 0);
   }
 
-  // ── MOBILE MENU TOGGLE ──
+  // ── NAVIGATION ──
+  function navigate(id, el) {
+    // hide all sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    // deactivate all nav items
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    // show target
+    document.getElementById(id).classList.add('active');
+    // activate clicked item (mark all same-section nav items)
+    document.querySelectorAll(`.nav-item`).forEach(n => {
+      if (n.getAttribute('onclick') === el?.getAttribute('onclick')) n.classList.add('active');
+    });
+    // close mobile nav
+    document.getElementById('mobileNav').classList.remove('open');
+    window.scrollTo(0, 0);
+  }
+
+  // ── MOBILE NAV TOGGLE ──
   function toggleMobileNav() {
     document.getElementById('mobileNav').classList.toggle('open');
   }
 
-  // Start initialization on DOM complete
-  document.addEventListener('DOMContentLoaded', initBlog);
-</script>
+  // ── TERMINAL TYPING ──
+  const phrases = [
+    'cat current_focus.txt',
+    'git commit -m "keep learning"',
+    'python train_model.py',
+    'dotnet run --project Blog',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typedLine');
 
+  function type() {
+    const word = phrases[pi];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 40 : 70);
+  }
+  setTimeout(type, 1200);
+</script>
 </body>
 </html>
